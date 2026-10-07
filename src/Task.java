@@ -19,7 +19,9 @@ public class Task {
     public int getId(){
         return this.id;
     }
-
+    public void setStatus(String status){
+        this.taskStatus = status;
+    }
 
 
 
