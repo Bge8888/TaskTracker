@@ -7,8 +7,6 @@ public class Task {
         this.id = id;
         this.taskStatus = status;
         this.taskTitle = title;
-
-
     }
     public String getName(){
         return this.taskTitle;
@@ -22,11 +20,7 @@ public class Task {
     public void setStatus(String status){
         this.taskStatus = status;
     }
-
-
-
-
-
-
-
+    public void setID(int id){
+        this.id = id;
+    }
 }

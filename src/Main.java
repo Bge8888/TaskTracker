@@ -4,32 +4,42 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
+
         Scanner scan = new Scanner(System.in);
         int choice = 0;
-        int idIncrease = 1;
+
         while(true) {
 
             System.out.println("=== TASK TRACKER ===");
             System.out.println("1. Add task");
             System.out.println("2. List tasks");
             System.out.println("3. Update task");
-            System.out.println("4. Exit");
+            System.out.println("4. Delete a task");
+            System.out.println("5. Exit");
 
             System.out.print("Choose an option: ");
 
             choice = Integer.valueOf(scan.nextLine());
             System.out.println("You chose: " + choice);
             System.out.println(" ");
-            if (choice == 4){
+            if (choice == 5){
                 break;
             }
             if (choice == 1){
                 System.out.println("What should we name the task?");
                 String taskName = scan.nextLine();
-                tasks.add(new Task(idIncrease, taskName, "Ongoing"));
+                tasks.add(new Task(1, taskName, "Ongoing"));
                 System.out.println("Task " + taskName + " created successfully!");
                 System.out.println(" ");
-                idIncrease++;
+                int o = 1;
+                for (Task y : tasks){
+                    y.setID(o);
+                    o++;
+                }
+
+
+
+
             }
             if (choice == 2){
                 System.out.println("=== TASK LIST ===");
@@ -38,8 +48,6 @@ public class Main {
                     System.out.println(t.getId() + ".  |  " + t.getName() + "   |   Status: " + t.getStatus());
                 }
             }
-
-
             if (choice == 3){
                 System.out.println("What task do you want to change?");;
                 System.out.println();
@@ -53,7 +61,6 @@ public class Main {
                 System.out.println("1. Ongoing");
                 System.out.println("2. Finished");
 
-
                 int setStatus = Integer.valueOf(scan.nextLine());
                     for (Task y : tasks){
                         if (y.getId() == choiceTwo){
@@ -65,18 +72,24 @@ public class Main {
                         }
                     }
                 System.out.println("Status changed successfully!");
+            }
+            if (choice == 4){
+                System.out.println("What task do you want to delete?");
+                for (Task i : tasks){
+                    System.out.println(i.getId() + ".   " + i.getName() + "   |   " + "Status: " + i.getStatus());
+                }
+                int delete = Integer.valueOf(scan.nextLine());
+                tasks.removeIf(l -> l.getId() == delete);
 
-
+                System.out.println("Task removed successfully!");
+                // Set new id's for the tasks (since we just deleted one)
+                int tempo = 1;
+                for(Task o : tasks){
+                    o.setID(tempo);
+                    tempo++;
+                }
 
             }
-
-
-
-
-
-
-
-
         }
         scan.close();
     }
